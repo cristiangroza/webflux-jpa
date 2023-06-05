@@ -1,0 +1,11 @@
+---
+
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///mydb
+    username: sa
+    password: password
+
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
