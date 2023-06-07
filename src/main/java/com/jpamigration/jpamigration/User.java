@@ -1,18 +1,25 @@
 package com.jpamigration.jpamigration;
 
 
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Table("users")
+@Entity(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @Transient
-    private List<Address> addresses;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -36,5 +43,39 @@ public class User {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", addresses=" + addresses +
+                ", orders=" + orders +
+                '}';
+    }
+
+    public User loadAddresses() {
+        this.getAddresses().size();
+        return this;
+    }
+
+    public User loadOrders() {
+        this.getOrders().size();
+        return this;
+    }
+
+    public User addAddress(Address address) {
+        address.setUser(this);
+        addresses.add(address);
+        return this;
     }
 }
