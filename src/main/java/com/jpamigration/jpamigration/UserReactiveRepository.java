@@ -12,13 +12,13 @@ import reactor.core.publisher.Mono;
 import java.util.stream.Stream;
 
 @Repository
-public class UserRepository {
-    private final Logger logger = LoggerFactory.getLogger(UserRepository.class);
+public class UserReactiveRepository {
+    private final Logger logger = LoggerFactory.getLogger(UserReactiveRepository.class);
 
-    private final JpaUserRepository jpaUserRepository;
+    private final UserJpaRepository jpaUserRepository;
     private final TransactionTemplate transactionTemplate;
 
-    public UserRepository(JpaUserRepository jpaUserRepository, TransactionTemplate transactionTemplate) {
+    public UserReactiveRepository(UserJpaRepository jpaUserRepository, TransactionTemplate transactionTemplate) {
         this.jpaUserRepository = jpaUserRepository;
         this.transactionTemplate = transactionTemplate;
     }
@@ -50,6 +50,6 @@ public class UserRepository {
 }
 
 @Repository
-interface JpaUserRepository extends CrudRepository<User, Long> {
+interface UserJpaRepository extends CrudRepository<User, Long> {
     Stream<User> findAllBy();
 }

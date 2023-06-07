@@ -10,9 +10,9 @@ import reactor.core.publisher.Mono;
 public class UserService {
 
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
-    private final UserRepository userRepository;
+    private final UserReactiveRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserReactiveRepository userRepository) {
         this.userRepository = userRepository;
     }
 
