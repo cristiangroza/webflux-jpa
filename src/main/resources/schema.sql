@@ -11,10 +11,21 @@ create table address(
     foreign key (user_id) references users(id)
 );
 
+create table orders(
+    id int not null AUTO_INCREMENT,
+    user_id int not null ,
+    details varchar(100),
+    foreign key (user_id) references users(id)
+);
+
 insert into users(id, name) values
-                                ( 1, 'Cristian' ),
-                                ( 2, 'Eliza' );
+                                ( 999, 'Cristian' ),
+                                ( 998, 'Eliza' );
 
 insert into address(id, user_id, content) values
-                                              (1, 1, 'Faget 5A' ),
-                                              (2, 2, 'Coposu');
+                                              (99, 999, 'Faget 5A' ),
+                                              (98, 998, 'Coposu');
+
+insert into orders(id, user_id, details) values
+                                             ( 99, 999, 'Mere' ),
+                                             (98, 999, 'Pere');

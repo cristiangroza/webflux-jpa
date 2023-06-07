@@ -1,8 +1,8 @@
 package com.jpamigration.jpamigration;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class UserResource {
@@ -16,5 +16,25 @@ public class UserResource {
     @GetMapping("/api/users")
     public Flux<User> getUsers() {
         return userService.findAll();
+    }
+
+    @PostMapping("/api/users")
+    public Mono<User> createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+    @PutMapping("/api/users/{id}")
+    public Mono<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+
+    @PostMapping("/api/users/{id}/address")
+    public Mono<Address> addAddress(@PathVariable("id") Long id, @RequestBody Address address) {
+        return userService.addAddress(id, address);
+    }
+
+    @DeleteMapping("/api/users/{id}")
+    public Mono<Void> deleteUser(@PathVariable("id") Long id) {
+        return userService.deleteUser(id);
     }
 }

@@ -3,13 +3,12 @@ package com.jpamigration.jpamigration;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-@Entity(name = "address")
-public class Address {
-
+@Entity(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String content;
+    private String details;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -24,12 +23,12 @@ public class Address {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getDetails() {
+        return details;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public User getUser() {
